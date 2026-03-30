@@ -21,7 +21,7 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
       - name: build and push
         run: |
-          docker build -t mohamedali1444/flask_devops_demo:latest
+          docker build -t mohamedali1444/flask_devops_demo:latest .
           docker push mohamedali1444/flask_devops_demo:latest
 
       - name: Deploy to Server via SSH
