@@ -21,8 +21,12 @@ jobs:
           password: ${{secrets.DOCKERHUB_TOKEN}}
       - name: build and push
         run: |
+          docker build -t mohamedali1444/flask_devops_demo:latest
+          docker push mohamedali1444/flask_devops_demo:latest
+
+      - name: Deploy to Server via SSH
+        run: |
           echo "${{ secrets.SSH_KEY }}" > key.pem
           chmod 600 key.pem
-          # We use a backslash \ to ensure the command continues on the next line correctly
           ssh -i key.pem -o StrictHostKeyChecking=no "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" \
           "powershell -ExecutionPolicy Bypass -File 'C:\Users\Moham\Documents\DOCKER\deploy.ps1' -DockerUser ${{ secrets.DOCKERHUB_USERNAME }} -DockerToken ${{ secrets.DOCKERHUB_TOKEN }}"
