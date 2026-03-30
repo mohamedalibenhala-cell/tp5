@@ -2,7 +2,7 @@ name: CI/CD Flask Docker
 on:
   push:
     branches:
-      -main
+      - main
 
 jobs:
   cd:
